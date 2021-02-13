@@ -113,10 +113,27 @@ searchBtn.addEventListener('click', function () {
   document.querySelector('.main').style.display = 'none';
   clearInterval(timer);
   const search = document.getElementById('search');
+
+
+
+
+
+
   getImages(search.value)
   sliders.length = 0;
+
+
 })
 
 sliderBtn.addEventListener('click', function () {
   createSlider()
 })
+
+
+// adding search enter keypress;
+
+  const search = document.getElementById('search').addEventListener("keypress",function(event){
+if(event.key === 'Enter'){
+  const searchBtn = document.getElementById('search-btn').click();
+}
+  });
