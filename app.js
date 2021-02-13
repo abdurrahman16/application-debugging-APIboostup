@@ -137,3 +137,18 @@ if(event.key === 'Enter'){
   const searchBtn = document.getElementById('search-btn').click();
 }
   });
+
+
+
+
+   // Select your input element.
+   var number = document.getElementById('duration');
+  
+   // Listen for input event on numInput.
+   number.onkeydown = function(e) {
+       if(!((e.keyCode > 95 && e.keyCode < 106)
+         || (e.keyCode > 47 && e.keyCode < 58) 
+         || e.keyCode == 8)) {
+           return false;
+       }
+   }
