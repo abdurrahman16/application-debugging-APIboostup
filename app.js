@@ -39,20 +39,36 @@ let slideIndex = 0;
 const selectItem = (event, img) => {
   let element = event.target;
   element.classList.add('added');
- 
+  
   let item = sliders.indexOf(img);
   if (item === -1) {
     sliders.push(img);
-  } else {
-    alert('Hey, Already added !')
+  } else { 
+    
+    function func() { 
+
+      sliders.pop(img);
+      // Removing the specified element by value from the array  
+      for (let i = 0; i < sliders.length; i++) { 
+          if (sliders[i] === img)
+           { 
+              let spliced = sliders.splice(i, 1); 
+              
+          } 
+      } 
+  } 
+  func();
+    
   }
 }
 var timer
 const createSlider = () => {
   // check slider image length
   if (sliders.length < 2) {
-    alert('Select at least 2 image.')
+    alert('Select at least 2 image.')  
     return;
+    
+
   }
   // crate slider previous next area
   sliderContainer.innerHTML = '';
@@ -65,6 +81,8 @@ const createSlider = () => {
 
   sliderContainer.appendChild(prevNext)
   document.querySelector('.main').style.display = 'block';
+
+
   // hide image aria
   imagesArea.style.display = 'none';
   const duration = document.getElementById('duration').value || 1000;
@@ -127,7 +145,23 @@ searchBtn.addEventListener('click', function () {
 
 sliderBtn.addEventListener('click', function () {
   createSlider()
+  btnChecker();
+     
 })
+
+
+function btnChecker (){
+  // let index = array.indexOf(5);
+  // console.log(item); 
+
+  // let items = sliders.indexOf(img);
+
+  // if (items > -1) {
+  //   sliders.splice(items, 1);
+  // }
+  console.log(sliders);
+ 
+}
 
 
 // adding search enter keypress;
@@ -152,3 +186,8 @@ if(event.key === 'Enter'){
            return false;
        }
    }
+
+
+   //toggle
+   
+   
