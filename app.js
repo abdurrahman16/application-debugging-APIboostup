@@ -4,14 +4,25 @@ const galleryHeader = document.querySelector('.gallery-header');
 const searchBtn = document.getElementById('search-btn');
 const sliderBtn = document.getElementById('create-slider');
 const sliderContainer = document.getElementById('sliders');
+
+var modal = document.getElementById("myModal");
+var span = document.getElementsByClassName("close")[0];
+
 // selected image 
 let sliders = [];
-
+// NB: Though there is no async and waiting call in fetch
+// so the spin gets quick show and hide.
+// if there is any delay in showing fetch data then it works fine & tested.
+//Thanks
+function spinnerShow(){
+  document.getElementById('spinner').style.display ='block';
+}
 
 // If this key doesn't work
 // Find the name in the url and go to their website
 // to create your own api key
 const KEY = '15674931-a9d714b6e9d654524df198e00&q';
+
 
 // show images 
 const showImages = (images) => {
@@ -24,6 +35,11 @@ const showImages = (images) => {
     div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
     div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
     gallery.appendChild(div)
+    function spinnerHide(){
+      document.getElementById('spinner').style.display ='none';
+    }
+    spinnerHide(); // hide spinner when data fetched..
+    
   })
 
 }
@@ -40,14 +56,13 @@ const selectItem = (event, img) => {
   let element = event.target;
   element.classList.add('added');
   
+  
   let item = sliders.indexOf(img);
   if (item === -1) {
     sliders.push(img);
   } else { 
-    
-    function func() { 
-
-      sliders.pop(img);
+    element.classList.remove('added');
+       function func() { 
       // Removing the specified element by value from the array  
       for (let i = 0; i < sliders.length; i++) { 
           if (sliders[i] === img)
@@ -65,7 +80,12 @@ var timer
 const createSlider = () => {
   // check slider image length
   if (sliders.length < 2) {
-    alert('Select at least 2 image.')  
+    // alert('Select at least 2 image.')  
+    document.getElementById('popupMessage').innerHTML= 'Select at least 2 image.';
+    function showPop() {
+      modal.style.display = "block";
+    }
+      showPop();
     return;
     
 
@@ -129,39 +149,17 @@ const changeSlide = (index) => {
 
 searchBtn.addEventListener('click', function () {
   document.querySelector('.main').style.display = 'none';
+  spinnerShow() // show spinner when clicked
   clearInterval(timer);
   const search = document.getElementById('search');
-
-
-
-
-
-
   getImages(search.value)
   sliders.length = 0;
-
 
 })
 
 sliderBtn.addEventListener('click', function () {
-  createSlider()
-  btnChecker();
-     
+  createSlider()   
 })
-
-
-function btnChecker (){
-  // let index = array.indexOf(5);
-  // console.log(item); 
-
-  // let items = sliders.indexOf(img);
-
-  // if (items > -1) {
-  //   sliders.splice(items, 1);
-  // }
-  console.log(sliders);
- 
-}
 
 
 // adding search enter keypress;
@@ -171,8 +169,6 @@ if(event.key === 'Enter'){
   const searchBtn = document.getElementById('search-btn').click();
 }
   });
-
-
 
 
    // Select your input element.
@@ -188,6 +184,14 @@ if(event.key === 'Enter'){
    }
 
 
-   //toggle
    
-   
+   // popup
+
+span.onclick = function() {
+  modal.style.display = "none";
+}
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}

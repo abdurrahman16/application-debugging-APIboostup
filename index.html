@@ -17,6 +17,15 @@
 
 <body>
 
+<!-- Popup -->
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h1 id="popupMessage">Text</h1>
+  </div>
+</div>
+
+ <!-- navbar added -->
   <nav>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="#">Copyright Free Collection</a>
@@ -33,6 +42,9 @@
       </div>
     </nav>
   </nav>
+
+  
+
   <div class="container">
     <h4 class="mt-2 text-center">Search Image for create slider</h4>
     <div class="form-inline mt-3 d-flex justify-content-center">
@@ -41,6 +53,15 @@
       </div>
       <button type="button" id="search-btn" class="btn btn-primary mb-2">Search</button>
     </div>
+    <br>
+    <!-- spinner added -->
+    <div class="d-flex justify-content-center " >
+      <div class="spinner-grow" id="spinner" style="width: 3rem; height: 3rem; display: none;" role="status">
+        <span class="visually-hidden"></span>
+      </div>
+      </div>
+    </div>
+
     <section class="images">
       <div class="justify-content-around align-items-center mt-3 gallery-header mb-2">
         <h3 class="head-title text-center">Select image for create slider</h3>
